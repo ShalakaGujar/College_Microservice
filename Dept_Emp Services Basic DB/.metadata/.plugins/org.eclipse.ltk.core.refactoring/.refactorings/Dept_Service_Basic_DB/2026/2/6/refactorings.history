@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Department.java&apos; to &apos;Emp_Service_Basic_DB/src/main/java/com.spc.emp.model&apos;&#x0D;&#x0A;- Original project: &apos;Dept_Service_Basic_DB&apos;&#x0D;&#x0A;- Destination element: &apos;Emp_Service_Basic_DB/src/main/java/com.spc.emp.model&apos;&#x0D;&#x0A;- Original element: &apos;com.spc.dept.model.Department.java&apos;" description="Copy compilation unit" destination="=Emp_Service_Basic_DB/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.spc.emp.model" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.spc.dept.model{Department.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1770103550389" units="1" version="1.0"/>
+</session>

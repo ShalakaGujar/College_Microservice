@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Dept_Service_Basic_YML
+  
+  datasource:
+    username: postgres
+    password: admin123
+
+  jpa:
+    hibernate:
+      ddl-auto: true
+
+    show-sql: true
+
+server:
+  port: 8081	

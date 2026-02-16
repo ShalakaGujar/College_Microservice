@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: Dept_Service_Basic_YML

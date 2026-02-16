@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Dept_Service_Basic_YML&apos; to &apos;Dept_Service_Basic_DB&apos;" description="Rename resource &apos;Dept_Service_Basic_YML&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Dept_Service_Basic_YML" name="Dept_Service_Basic_DB" stamp="1770103231779" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Emp_Service_Basic_YML&apos; to &apos;Emp_Service_Basic_DB&apos;" description="Rename resource &apos;Emp_Service_Basic_YML&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Emp_Service_Basic_YML" name="Emp_Service_Basic_DB" stamp="1770103239317" updateReferences="true"/>
+</session>

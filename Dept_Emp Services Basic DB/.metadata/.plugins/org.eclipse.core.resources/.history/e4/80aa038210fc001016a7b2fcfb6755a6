@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Dept_Service_Basic_YML
+  
+  datasource:
+    username: postgres
+    password: admin123
+server:
+  port: 8081
+	

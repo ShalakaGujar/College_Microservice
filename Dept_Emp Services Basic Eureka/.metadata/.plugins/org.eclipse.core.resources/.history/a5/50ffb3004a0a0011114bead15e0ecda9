@@ -1,0 +1,67 @@
+package com.spc.emp.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.spc.emp.model.Employee;
+import com.spc.emp.service.EmployeeService;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+@RestController
+@RequestMapping("/emp")
+public class EmployeeController {
+
+	private final EmployeeService empService;
+
+    public EmployeeController(EmployeeService empService) {
+
+        this.empService = empService;
+    }
+    
+    @GetMapping("/dept/{deptId}")
+    public List<Employee> getEmpByDeptId(@PathVariable Long deptId) {
+    	System.out.println("hello");
+        return empService.getEmpByDeptId(deptId);
+    }
+    
+	@PostMapping("/add")
+	public Employee saveEmployee(@RequestBody Employee e) {
+		Employee obj = empService.saveEmployee(e);
+		return obj;
+	}
+	
+	@PostMapping("/addall")
+	public List<Employee> saveEmployees(@RequestBody List<Employee> lstEmp) {
+		List<Employee> obj = empService.saveEmployees(lstEmp);
+		return obj;
+	}
+	
+	@GetMapping("/all")
+	public List<Employee> getAllEmpDetails()
+	{
+		return empService.getAllEmpDetails();
+	}
+	
+	@PutMapping("/update")
+	public Employee updateEmp(@RequestBody Employee d)
+	{
+		Employee obj = empService.updateEmp(d);
+		return obj;
+	}
+	
+	
+	@DeleteMapping("/{id}")
+	public void deleteEmp(@PathVariable Long id)
+	{
+		empService.deleteEmpById(id);
+	}
+}

@@ -1,0 +1,55 @@
+package com.spc.emp.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+import com.spc.emp.model.Employee;
+import com.spc.emp.repository.EmployeeRepository;
+
+@Service
+public class EmployeeService {
+
+	private final EmployeeRepository empRepo;
+
+    public EmployeeService(EmployeeRepository empRepo) {
+        this.empRepo = empRepo;
+    }
+
+	public Employee saveEmployee(Employee e) {
+		// TODO Auto-generated method stub
+		return empRepo.save(e);
+	}
+
+	public List<Employee> getAllEmpDetails() {
+		// TODO Auto-generated method stub
+		return empRepo.findAll();
+	}
+
+	public void deleteEmpById(Long id) {
+		// TODO Auto-generated method stub
+		empRepo.deleteById(id);
+	}
+
+	public Employee updateEmp(Employee e) {
+		// TODO Auto-generated method stub
+		Employee obj = empRepo.findById(e.getId()).get();
+		if(obj != null)
+		{
+			obj.setEmail(e.getEmail());
+			obj.setName(e.getName());
+			obj.setDesignation(e.getDesignation());
+			empRepo.save(obj);
+		}
+		else
+		{
+			// no object present
+		}
+		return null;
+	}
+
+	public List<Employee> getEmpByDeptId(Long deptId) {
+		// TODO Auto-generated method stub
+		return empRepo.findByDId(deptId);
+	}
+}

@@ -1,0 +1,5 @@
+spring:
+  application:
+	 name:ServiceDiscovery
+server:
+  address: 8671

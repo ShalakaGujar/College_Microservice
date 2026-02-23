@@ -1,0 +1,122 @@
+package com.spc.dept.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.spc.dept.common.DeptEmpResponse;
+import com.spc.dept.common.Employee;
+import com.spc.dept.model.Department;
+import com.spc.dept.repository.DepartmentRepository;
+
+import reactor.core.publisher.Mono;
+
+@Service
+public class DepartmentService {
+
+//	@Autowired
+//	private DepartmentRepository deptRepo;
+	
+	private final DepartmentRepository deptRepo;
+	private final WebClient webClient;
+	
+    public DepartmentService(
+    			DepartmentRepository deptRepo, 
+    			WebClient webClient) {
+        this.deptRepo = deptRepo;
+        this.webClient = webClient;
+    }
+    
+	public List<Department> getAllDeptInfo() {
+		// TODO Auto-generated method stub
+		return deptRepo.findAll();
+	}
+
+	public Department getDeptInfo(Long id) {
+		// TODO Auto-generated method stub
+		Optional<Department> obj = deptRepo.findById(id);
+		Department d = obj.get();
+		return d;
+	}
+
+	public Department saveDept(Department d) {
+		// TODO Auto-generated method stub
+		Department obj =deptRepo.save(d);
+		return obj;
+	}
+
+	public Department updateDept(Department d) {
+		// TODO Auto-generated method stub
+		Optional <Department> obj = deptRepo.findById(d.getId());
+		Department d1 = null;
+		if(obj != null)
+		{
+			d1 = obj.get(); //Get department object
+			d1.setDeptName(d.getDeptName());
+			deptRepo.save(d1);
+		}
+		else
+		{
+			// no object present
+		}
+		return d1;
+	}
+
+	public Department deleteDept(Long id) {
+		// TODO Auto-generated method stub
+		Optional<Department> obj = deptRepo.findById(id);
+		Department d1 = null;
+		if(obj != null)
+		{
+			d1 = obj.get();
+			deptRepo.delete(d1);
+		}
+		else
+		{
+			
+		}
+		return d1;
+	}
+	
+	public void deleteDeptById(Long id) {
+		// TODO Auto-generated method stub
+		deptRepo.deleteById(id);
+	}
+
+	public Mono<DeptEmpResponse> getDeptWithAllEmployess(Long id) {
+		// TODO Auto-generated method stub
+		Department obj = deptRepo.findById(id).orElse(null);
+		if(obj == null)
+			return Mono.empty();
+		
+		return webClient.get()
+				.uri("/emp/dept/" +id)
+				.retrieve()
+				.bodyToFlux(Employee.class)
+				.collectList()
+				.map(employees-> new DeptEmpResponse(
+									obj, 
+									employees
+									));
+	}
+
+	public Mono<String> addDeptWithEmployees(DeptEmpResponse obj) {
+		// TODO Auto-generated method stub
+		Department dept =obj.getDept();
+		deptRepo.save(dept);
+		List<Employee> lstEmp = obj.getEmployees();
+		return webClient.post()
+				.uri("/emp/addall")
+				.retrieve()
+				.bodyToFlux(Employee.class)
+				.collectList()
+				.map(employees-> new DeptEmpResponse(
+									obj, 
+									employees
+									));
+		return null;
+	}
+
+}

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: ServiceDiscovery
+server:
+  address: 8671
+  
+eureka:
+  instance:
+    hostname: localhost
+
+  client:
+    register-with-eureka: false
+    service-url: http://${euraka.instance.hostname}:{server.port}/eureka
+      

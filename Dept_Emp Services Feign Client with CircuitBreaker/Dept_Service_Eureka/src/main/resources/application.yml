@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: dept-service
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dept_emp_db 
+    username: postgres
+    password: admin123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+
+server:
+  port: 8081	
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+# Resilience4j Circuit Breaker configuration
+resilience4j:
+  circuitbreaker:
+    instances:
+      emp-service:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
